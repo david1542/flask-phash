@@ -5,7 +5,7 @@ import photohash
 
 UPLOAD_FOLDER = './tmp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
+ROOT_DIRECTORY = os.path.dirname(__file__)
 similarity_offset = 4
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def upload_file():
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                path = os.path.join(ROOT_DIRECTORY + '/' + app.config['UPLOAD_FOLDER'], filename)
 
                 file.save(path)
                 file_paths.append(path)
@@ -51,15 +51,3 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
-
-def get_files(target_dir):
-    item_list = os.listdir(target_dir)
-
-    file_list = list()
-    for item in item_list:
-        item_dir = os.path.join(target_dir,item)
-        if os.path.isdir(item_dir):
-            file_list += get_files(item_dir)
-        else:
-            file_list.append(item_dir)
-    return file_list
