@@ -56,16 +56,33 @@ function removeDragData(ev) {
 
 document.getElementById('submit-btn').onclick = sendFiles;
 
+function showLoading() {
+    document.querySelector('.loader').style.opacity = '1';
+    document.getElementById('answer').style.display = 'none';    
+}
+
+function hideLoading() {
+    document.querySelector('.loader').style.opacity = '0';
+    document.getElementById('answer').style.display = 'block';        
+}
+
 function sendFiles() {
+    showLoading();
+
     var formData = new FormData();    
     for(var i = 0; i < files.length; i++) {
         formData.append(`file${i}`, files[i]);
     }
+
     fetch('/', {
         method: 'POST',
         body: formData
     }).then(response => response.json())
-    .then(data => printData(data))
+    .then(data => {
+        printData(data);
+
+        hideLoading();
+    })
     .catch(error => console.log(error));
 }
 
