@@ -3,7 +3,7 @@ from flask import Flask, flash, request, redirect, url_for, send_from_directory,
 from werkzeug.utils import secure_filename
 import photohash
 
-UPLOAD_FOLDER = './tmp'
+UPLOAD_FOLDER = 'tmp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT_DIRECTORY = os.path.dirname(__file__)
 similarity_offset = 4
