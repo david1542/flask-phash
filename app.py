@@ -3,9 +3,9 @@ from flask import Flask, flash, request, redirect, url_for, send_from_directory,
 from werkzeug.utils import secure_filename
 import photohash
 
-UPLOAD_FOLDER = 'tmp'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 ROOT_DIRECTORY = os.path.dirname(__file__)
+UPLOAD_FOLDER = ROOT_DIRECTORY + '/tmp'
 similarity_offset = 4
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def upload_file():
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                path = os.path.join(ROOT_DIRECTORY + '/' + app.config['UPLOAD_FOLDER'], filename)
+                path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
                 file.save(path)
                 file_paths.append(path)
