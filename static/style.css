@@ -1,4 +1,5 @@
 .container {
+    width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +8,7 @@
 .drag-sections {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin: 40px 0;
 }
@@ -32,7 +33,7 @@
 }
 
 #answer {
-    width: 80%;
+    width: 100%;
     padding: 15px;
 }
 
