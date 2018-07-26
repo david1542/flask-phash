@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drag-sections {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 40px 0;
+}
+
+.drop-zone {
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 370px;
+    height: 250px;
+    border-radius: 10px;
+    border: 2px dashed black;
+    background: rgba(173,198,223,.5);
+}
+
+.drop-zone p {
+    user-select: none;
+    pointer-events: none;
+}
+
+#answer {
+    width: 80%;
+    padding: 15px;
+}
+
+#answer h4 {
+    text-align: center;
+}
