@@ -18,6 +18,19 @@ function dropHandler(ev) {
                     files[1] = file;                    
                 }
 
+                var reader = new FileReader();
+                reader.onload = function(){
+                    var dataURL = reader.result;
+                    var output = document.querySelector(`#${elementId} > img`);
+                    output.src = dataURL;
+                    output.style.opacity = '1';
+
+                    var zone = document.getElementById(elementId);
+                    zone.style.border = '2px solid black';
+                    zone.style.color = 'white';
+                };
+
+                reader.readAsDataURL(file);
             }
         }
     } else {
@@ -54,7 +67,8 @@ function removeDragData(ev) {
     }
 }
 
-document.getElementById('submit-btn').onclick = sendFiles;
+document.getElementById('submit-btn').onclick = handleSubmit;
+document.getElementById('clear-btn').onclick = clearFiles;
 
 function showLoading() {
     document.querySelector('.loader').style.opacity = '1';
@@ -64,6 +78,33 @@ function showLoading() {
 function hideLoading() {
     document.querySelector('.loader').style.opacity = '0';
     document.getElementById('answer').style.display = 'block';        
+}
+
+function handleSubmit() {
+    if(validate()) {
+        sendFiles();        
+    } else {
+        showError();
+    }
+}
+
+function showError() {
+    document.querySelector('#answer').style.display = 'none';            
+    document.querySelector('#error').style.display = 'block';
+    document.querySelector('#error').style.opacity = '1';
+    document.querySelector('#error h4').innerHTML = 'Please fill images first';
+
+    setTimeout(function() {
+        document.querySelector('#error').style.opacity = '0';
+
+        setTimeout(function() {
+            document.querySelector('#error').style.display = 'none';            
+        }, 500);
+    }, 2000);
+}
+
+function validate() {
+    return files.length === 2;
 }
 
 function sendFiles() {
@@ -94,4 +135,26 @@ function printData(data) {
         document.getElementById('answer').className += 'alert alert-warning';
         document.querySelector('#answer > h4').innerHTML = 'The images are not similar :(';
     }
+}
+
+function clearFiles() {
+    files = [];
+
+    document.querySelectorAll('.drag-sections .drop-zone .output').forEach(child => {
+        child.style.opacity = '0';
+    });
+    document.querySelectorAll('.drag-sections .drop-zone > img').forEach(child => {
+        child.src = '';
+    });
+    document.querySelectorAll('.drag-sections .drop-zone > p').forEach(child => {
+        child.innerHTML = 'Drag Image To Here';  
+    }); 
+    document.querySelectorAll('.drag-sections .drop-zone').forEach(child => {
+        child.style.border = '2px dashed black';
+    });
+    document.querySelectorAll('.drag-sections .drop-zone').forEach(child => {
+        child.style.color = 'black';
+    });
+
+    document.querySelector('#answer').style.display = 'none';
 }

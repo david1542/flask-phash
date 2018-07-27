@@ -14,15 +14,22 @@
         <div class="drag-sections">
             <div id="zone-1" class="drop-zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
                 <p>Drag Image To Here</p>
+                <img class="output" alt="Image" src=""/>
             </div>
             <div class="loader"></div>
             <div id="zone-2" class="drop-zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
                 <p>Drag Image To Here</p>
+                <img class="output" alt="Image" src="" />
             </div>
         </div>
 
-        <button id="submit-btn" class="btn btn-lg btn-primary mb-5">Compare</button>
-
+        <div class="buttons">
+            <button id="submit-btn" class="btn btn-lg btn-primary mb-5">Compare</button>            
+            <button id="clear-btn" class="btn btn-lg btn-primary mb-5">Clear Images</button>                        
+        </div>
+        <div id="error" class="alert alert-danger">
+            <h4></h4>
+        </div>
         <div id="answer">
             <h4></h4>
         </div>
